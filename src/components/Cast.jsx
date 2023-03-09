@@ -7,15 +7,13 @@ import {
     API_KEY,
     Get_MOVIE_CREDITS,
     BASE_IMG_URL,
-   MOBILE_SIZES,
+    MOBILE_SIZES,
 } from './vars';
  
 const Cast = ({ id }) =>
 {
     const [informationCast, setInformationCast] = useState([]);
     const prevId = useRef(0);
-   
-    
 
     useEffect(() => {
         if (prevId.current === id) { return; }
@@ -25,10 +23,9 @@ const Cast = ({ id }) =>
                 console.log('res.data setInformationCast', res.data.cast); setInformationCast(res.data.cast);
             })
             }, [id]);
-   
 
 let url = `${BASE_IMG_URL}${MOBILE_SIZES}`
-   
+       
     return (
       <main>
             <div>

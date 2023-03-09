@@ -27,10 +27,11 @@ const Reviews = ({ id }) =>
      
     return (
       <main>
-            <div>
+            <div>{
+                informationReviews===[]?
                 <ul>
                     {informationReviews.map((item, index) => <li key={item.id}><div><h5>Author: {item.author}</h5> <p>{item.content}</p></div> </li>)} 
-               </ul>
+               </ul>:<p>We don't have any reviews for this movie</p>}
                 
             </div>
       </main>

@@ -1,14 +1,15 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route,useSearchParams } from "react-router-dom";
 import { requestGet } from './requestGet';
 import { useEffect, useState, useRef } from 'react';
 import Loyout from "./Loyout/Loyout";
 import Home from "../pages/Home";
 import Movies from "../pages/Movies";
 import Information from "pages/Information";
-import { Searchbar } from "./Searchbar/Searchbar";
+import  Searchbar  from "./Searchbar/Searchbar";
 import ResultSearchFilm from "./ResultSearchFilm/ResultSearchFilm";
 import Cast from "./Cast";
 import Reviews from "./Reviews";
+import NotFound from "./NotFound/NotFound";
 
 import {
   API_KEY,
@@ -22,8 +23,10 @@ export const App = () => {
   const [informationTrendingOnFilm, setInformationTrendingOnFilm] = useState([]);
   const [informationSearchOnFilm, setInformationSearchOnFilm] = useState([]);
   const [informationMovieDetails, setInformationMovieDetails] = useState({});
+   const [searchParams, setSearchParams] = useSearchParams();
+  const searchWord = searchParams.get('searchWord');
 
-  const [filmName, setFilmName] = useState('');
+ // const [filmName, setFilmName] = useState('');
   const [id, setId] = useState(0);
 
   
@@ -32,11 +35,13 @@ export const App = () => {
   const prevId = useRef(0);
   const genresString = useRef('');
   const yearRelease = useRef('');
+  
 
   const updateNameFilm = filmName => {
     //Збереження в state пошукового слова запиту на пошук фільму.
-    setFilmName(filmName);
-    console.log(filmName);
+   // setFilmName(filmName);
+    setSearchParams({searchWord:filmName});
+  //  console.log(filmName);
   }
   const activId = id => {
     //Збереження в state пошукового слова запиту на пошук фільму.
@@ -52,10 +57,10 @@ export const App = () => {
 
   useEffect(() => {
 
-    if (filmName !== '') { 
-    if (prevFilmName.current !== filmName) {
+    if (searchWord !== '') { 
+    if (prevFilmName.current !== searchWord) {
       // console.log('useEffect: prevImageName.current !== imageName');
-      prevFilmName.current = filmName;
+      prevFilmName.current = searchWord;
       requestGet(MAIN_PART_URL, SEARCH_MOVIE,0, API_KEY, `&query=${prevFilmName.current}`)
         .then(res => { console.log('rez', res.data.results); setInformationSearchOnFilm(res.data.results); });
       }
@@ -74,19 +79,22 @@ export const App = () => {
        
     }
 
-  }, [filmName,id])
+  }, [searchWord,id])
 
   return (
     <div>
       <Routes>
-        <Route path="/"element={<Loyout/>}>
-            <Route path="" element={<Home> <div><h1>Trending today</h1></div> <ResultSearchFilm onLink={activId} ResultSearchFilm={informationTrendingOnFilm} /></Home>   } />
-            <Route path="movies" element={<Movies > <Searchbar onSubmit={updateNameFilm}></Searchbar> {filmName &&< ResultSearchFilm onLink={activId} ResultSearchFilm={informationSearchOnFilm} />}  </Movies>} />
-            <Route path=":information" element={<Information informationMovieDetails={informationMovieDetails} genresString={genresString.current} id={id}  yearRelease={yearRelease.current} />} >
-                <Route path="cast" element={<Cast id={id } /> } />
-                <Route path="reviews" element={<Reviews id={id} /> } />
+        <Route path="/" element={<Loyout />}>
+          <Route index element={<Home> <div><h1>Trending today</h1></div> <ResultSearchFilm onLink={activId} ResultSearchFilm={informationTrendingOnFilm} /></Home>   } />
+           
+            <Route path="movies" element={<Movies > <Searchbar onSubmit={updateNameFilm}></Searchbar> {searchWord &&< ResultSearchFilm onLink={activId} ResultSearchFilm={informationSearchOnFilm} />}  </Movies>} />     
+            <Route path="/:id" element={<Information informationMovieDetails={informationMovieDetails} genresString={genresString.current} id={id} yearRelease={yearRelease.current} />} >
+                  <Route path="cast" element={<Cast id={id } /> } />
+                  <Route path="reviews" element={<Reviews id={id} />} />
             </Route>
+                
           </Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

@@ -8,8 +8,8 @@ const Loyout = () =>
 {
    // console.log('ImageGalleryItem',datas);
    return (
-       <>
-    < LoyoutBox> 
+      <>
+         < LoyoutBox> 
                 <nav>
                 <Link to="/"> <span>Home</span>   </Link>
                 <Link to="/movies"> <span>Movies</span> </Link>
@@ -17,10 +17,9 @@ const Loyout = () =>
              < LineBox>  
                  <Line> </Line>    
             </ LineBox> 
-       
          </ LoyoutBox>
           <Outlet />
-         </>
+      </>
      )
 }
 export default Loyout;

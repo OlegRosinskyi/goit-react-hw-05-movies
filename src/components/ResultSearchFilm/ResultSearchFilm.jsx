@@ -1,21 +1,20 @@
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link,useLocation,generatePath, useParams } from 'react-router-dom';
 //import { Link } from "react-router-dom";
-
+const str = '/:id';
 const ResultSearchFilm = ({onLink,ResultSearchFilm}) =>
-{
-
+{ const location = useLocation();
+  const nId = useParams();
    const onClickLink = (event) => {
      console.log(event.target.id);
      onLink(event.target.id);
   }
-   // console.log('ImageGalleryItem',datas);
+    console.log('nId',nId);
     return (
       <main>
-       
         <div>
-        <ul onClick={onClickLink}>
-            {ResultSearchFilm.map((item, index) => <li   key={item.id}><Link id={item.id} to="/information">{item.name ? item.name : item.original_title}</Link></li>)}
+          <ul onClick={onClickLink}>
+            {ResultSearchFilm.map((item) => <li   key={item.id}><Link path={generatePath(str, {id:item.id,})}  to={generatePath(str, {id:item.id,})} state={{ from: location }} id={item.id} >{item.name ? item.name : item.original_title}</Link></li>)}
         </ul>
       </div>
       </main>
@@ -24,5 +23,6 @@ const ResultSearchFilm = ({onLink,ResultSearchFilm}) =>
 export default ResultSearchFilm;
 
 ResultSearchFilm.propTypes = {
-    informationOnFilm: PropTypes.array,
+  ResultSearchFilm: PropTypes.array,
+  onLink:PropTypes.func,
 }

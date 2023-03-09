@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import PropTypes from 'prop-types';
 import { SearchbarInput } from "./Searchbar.stiled";
 import { SearchbarBox } from "./Searchbar.stiled";
@@ -14,12 +14,11 @@ export default function Searchbar({ onSubmit }) {
         if (filmName.trim() === '') { toast.error('Введите название картинки'); return; }
         onSubmit(filmName.trim());
         resetSearchImage();
-        // event.currentTarget.value = '';
-    };
+        };
     const searchImage = (event) => { event.preventDefault(); setFilmName(event.currentTarget.value); };
     const resetSearchImage = () => { setFilmName(''); };
 
-    useEffect(() =>{},[filmName])
+    //useEffect(() =>{},[filmName])
 return (
         
             <SearchbarBox>
@@ -41,7 +40,7 @@ return (
      )
  }
 Searchbar.propTypes = {
-    onChange: PropTypes.func, 
+    onSubmit: PropTypes.func, 
 }
 
 

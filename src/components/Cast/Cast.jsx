@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useState,useEffect, useRef } from 'react';
-import { requestGet } from './requestGet';
+import { requestGet } from '../requestGet';
+import { CastBox } from './Cast.stiled';
 import {
     MAIN_PART_URL,
     GET_MOVIE_DETAILS,
@@ -8,7 +9,7 @@ import {
     Get_MOVIE_CREDITS,
     BASE_IMG_URL,
     MOBILE_SIZES,
-} from './vars';
+} from '../vars';
  
 const Cast = ({ id }) =>
 {
@@ -20,7 +21,7 @@ const Cast = ({ id }) =>
         prevId.current = id;
         requestGet(MAIN_PART_URL, GET_MOVIE_DETAILS, id, Get_MOVIE_CREDITS, API_KEY)
             .then(res => {
-                console.log('res.data setInformationCast', res.data.cast); setInformationCast(res.data.cast);
+            setInformationCast(res.data.cast);
             })
             }, [id]);
 
@@ -28,12 +29,12 @@ let url = `${BASE_IMG_URL}${MOBILE_SIZES}`
        
     return (
       <main>
-            <div>
+            <CastBox>
                 <ul>
                     
                 {informationCast.map((item, index) => <li key={item.id}> <div><img src={url+item.profile_path} width='46px' alt={item.name} /> <p>{item.name}</p> <p>Character: {item.character}</p></div> </li>)}
                 </ul> 
-            </div>
+            </CastBox>
       </main>
      )
 }

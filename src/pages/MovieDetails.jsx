@@ -1,31 +1,28 @@
 import PropTypes from 'prop-types';
-import { Link,Outlet,useLocation,} from "react-router-dom";
+import { Outlet,useLocation,} from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
-import { ResultBox } from './Information.stiled';
-import { ResultLine } from './Information.stiled';
-import { ResultText } from './Information.stiled';
-
+import { ResultBox } from './MovieDetails.stiled';
+import { ResultLine } from './MovieDetails.stiled';
+import { ResultText,Link } from './MovieDetails.stiled';
 
 import {
     BASE_IMG_URL,
     MOBILE_SIZES,
 } from '../components/vars';
 
-const Information = ({informationMovieDetails,genresString,id,yearRelease }) =>
+const MovieDetails = ({informationMovieDetails,genresString,id,yearRelease }) =>
 {
-     const location = useLocation();
-
-  const go_Back = location?.state?.from ?? '/';
+        const location = useLocation();
+        const go_Back = location?.state?.from ?? '/';
   
-    let url;
-    
-    (informationMovieDetails.poster_path === null) ?  url= `../images/mi_fotou.jpg` : url = `${BASE_IMG_URL}${MOBILE_SIZES}${informationMovieDetails.poster_path}`
+        let url;
+        (informationMovieDetails.poster_path === null) ?  url= `../images/mi_fotou.jpg` : url = `${BASE_IMG_URL}${MOBILE_SIZES}${informationMovieDetails.poster_path}`
 
     return (
         <main>
            {id?
             <div>
-                    <div> <Link to={go_Back}><BiArrowBack/>Go back</Link></div>
+                <div> <Link to={go_Back}><BiArrowBack/>Go back</Link></div>
                 <ResultBox >
                     <div><img src={url} alt={informationMovieDetails.title} /></div>
                     <ResultText>
@@ -47,18 +44,16 @@ const Information = ({informationMovieDetails,genresString,id,yearRelease }) =>
                         <li>
                             <Link to="reviews" >Reviews</Link>
                         </li>
-        
                     </ul>
-                   
                 <ResultLine></ResultLine>
             </div>:<div></div> } 
             <Outlet />
       </main>
      )
 }
-export default Information;
+export default MovieDetails;
 
-Information.propTypes = {
+MovieDetails.propTypes = {
     informationOnFilm: PropTypes.object,
     genresString: PropTypes.string,
     id: PropTypes.number,

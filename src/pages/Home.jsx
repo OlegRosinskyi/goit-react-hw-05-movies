@@ -3,9 +3,6 @@ import PropTypes from 'prop-types';
 
 const Home = ({ children }) =>
 {
-  
-
-   // console.log('ImageGalleryItem',datas);
     return (
       <main> 
             <div>{children}</div>  

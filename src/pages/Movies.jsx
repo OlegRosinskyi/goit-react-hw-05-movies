@@ -5,7 +5,8 @@ const Movies = ({children}) =>
    // console.log('ImageGalleryItem',datas);
     return (
         <main> 
-            <div>{children}</div>  
+        <div>{children}</div> 
+        
         </main>
      )
 }

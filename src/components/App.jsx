@@ -2,15 +2,16 @@ import { Routes, Route,useSearchParams } from "react-router-dom";
 import { requestGet } from './requestGet';
 import { useEffect, useState, useRef } from 'react';
 import Loyout from "./Loyout/Loyout";
-//import Home from "../pages/Home";
-import { lazy,Suspense } from 'react';
-//import Movies from "../pages/Movies";
-//import MovieDetails from "pages/MovieDetails";
+import Home from "../pages/Home";
+//import { lazy } from 'react'; //,Suspense
+import Movies from "../pages/Movies";
+import MovieDetails from "pages/MovieDetails";
 import  Searchbar  from "./Searchbar/Searchbar";
 import ResultSearchFilm from "./ResultSearchFilm/ResultSearchFilm";
 import Cast from "../components/Cast/Cast";
-import Reviews from "../components/Rewiews/Reviews";
-//import NotFound from "./NotFound/NotFound";
+import Reviews from "../components/Rewiews/Reviews"
+
+import NotFound from "./NotFound/NotFound";
 
 import {
   API_KEY,
@@ -20,10 +21,10 @@ import {
   GET_MOVIE_DETAILS,
  } from './vars';
 
-const MovieDetails = lazy(() => import('pages/MovieDetails'));
-const NotFound = lazy(() => import('./NotFound/NotFound'));
-const Movies = lazy(() => import('pages/Movies'));
-const Home = lazy(() => import('pages/Home'));
+//const MovieDetails = lazy(() => import('pages/MovieDetails'));
+//const NotFound = lazy(() => import('./NotFound/NotFound'));
+//const Movies = lazy(() => import('pages/Movies'));
+//const Home = lazy(() => import('pages/Home'));
 
 export const App = () => {
   const [informationTrendingOnFilm, setInformationTrendingOnFilm] = useState([]);
@@ -79,23 +80,23 @@ export const App = () => {
     }
 
   }, [searchWord,id])
-
   return (
     <div>
-       <Suspense fallback={<div>Loading...</div>}>
+        <Loyout/>
       <Routes>
-        <Route path="/" element={<Loyout />}>
-            <Route index element={<Home> <div><h1>Trending today</h1></div> <ResultSearchFilm onLink={activId} ResultSearchFilm={informationTrendingOnFilm} /></Home>   } />
-            <Route path="movies" element={<Movies > <Searchbar onSubmit={updateNameFilm}></Searchbar> {searchWord &&< ResultSearchFilm onLink={activId} ResultSearchFilm={informationSearchOnFilm} />}  </Movies>} />     
-            <Route path="/:movieId" element={<MovieDetails informationMovieDetails={informationMovieDetails} genresString={genresString.current} id={id} yearRelease={yearRelease.current} />} >
-                  <Route path="cast" element={<Cast id={id } /> } />
-                  <Route path="reviews" element={<Reviews id={id} />} />
-            </Route>
-                
-          </Route>
+        <Route path="/">
+        <Route index element={<Home> <div><h1>Trending today</h1></div> <ResultSearchFilm onLink={activId} ResultSearchFilm={informationTrendingOnFilm} /></Home>   } />
+        <Route path="movies" element={<Movies > <Searchbar onSubmit={updateNameFilm}></Searchbar> {searchWord && < ResultSearchFilm onLink={activId} ResultSearchFilm={informationSearchOnFilm} />}  </Movies>} />
+        <Route path="movies/:movieId" element={<MovieDetails informationMovieDetails={informationMovieDetails} genresString={genresString.current} id={id} yearRelease={yearRelease.current} />} >
+            <Route path="cast" element={<Cast id={id } /> } />
+            <Route path="reviews" element={<Reviews id={id} />} />
+        </Route>
+        
+        </Route>
         <Route path="*" element={<NotFound />} />
-        </Routes>
-        </Suspense>
-    </div>
+      </Routes>
+   </div>
   );
 };
+      
+ 

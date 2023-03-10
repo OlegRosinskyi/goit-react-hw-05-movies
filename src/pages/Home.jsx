@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
-//import { Link } from 'react-router-dom';
+
 
 const Home = ({ children }) =>
 {
     return (
       <main> 
-            <div>{children}</div>  
+          <div>{children}</div>  
+          
         </main>
      )
 }

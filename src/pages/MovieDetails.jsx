@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Outlet,useLocation,} from "react-router-dom";
+import { useLocation, Outlet} from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { ResultBox } from './MovieDetails.stiled';
 import { ResultLine } from './MovieDetails.stiled';
@@ -45,9 +45,10 @@ const MovieDetails = ({informationMovieDetails,genresString,id,yearRelease }) =>
                             <Link to="reviews" >Reviews</Link>
                         </li>
                     </ul>
-                <ResultLine></ResultLine>
+                    <ResultLine></ResultLine>
+                    <Outlet/>
             </div>:<div></div> } 
-            <Outlet />
+            
       </main>
      )
 }

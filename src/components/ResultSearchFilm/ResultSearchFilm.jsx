@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Outlet,} from "react-router-dom";
 import { Link,useLocation,generatePath, useParams } from 'react-router-dom';
 //import { Link } from "react-router-dom";
 const str = '/:movieId';
@@ -15,7 +16,8 @@ const ResultSearchFilm = ({onLink,ResultSearchFilm}) =>
           <ul onClick={onClickLink}>
             {ResultSearchFilm.map((item) => <li   key={item.id}><Link path={generatePath(str, {movieId:item.id,})}  to={generatePath(str, {movieId:item.id,})} state={{ from: location }} id={item.id} >{item.name ? item.name : item.original_title}</Link></li>)}
         </ul>
-      </div>
+        </div>
+        <Outlet />
       </main>
      )
 }

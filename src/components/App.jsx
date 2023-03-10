@@ -85,8 +85,7 @@ export const App = () => {
        <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Loyout />}>
-          <Route index element={<Home> <div><h1>Trending today</h1></div> <ResultSearchFilm onLink={activId} ResultSearchFilm={informationTrendingOnFilm} /></Home>   } />
-           
+            <Route index element={<Home> <div><h1>Trending today</h1></div> <ResultSearchFilm onLink={activId} ResultSearchFilm={informationTrendingOnFilm} /></Home>   } />
             <Route path="movies" element={<Movies > <Searchbar onSubmit={updateNameFilm}></Searchbar> {searchWord &&< ResultSearchFilm onLink={activId} ResultSearchFilm={informationSearchOnFilm} />}  </Movies>} />     
             <Route path="/:movieId" element={<MovieDetails informationMovieDetails={informationMovieDetails} genresString={genresString.current} id={id} yearRelease={yearRelease.current} />} >
                   <Route path="cast" element={<Cast id={id } /> } />

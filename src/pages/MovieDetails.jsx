@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useLocation, Outlet} from "react-router-dom";
+import { useLocation, Outlet, useParams} from "react-router-dom";
 import { BiArrowBack } from "react-icons/bi";
 import { ResultBox } from './MovieDetails.stiled';
 import { ResultLine } from './MovieDetails.stiled';
@@ -10,14 +10,14 @@ import {
     MOBILE_SIZES,
 } from '../components/vars';
 
-const MovieDetails = ({informationMovieDetails,genresString,id,yearRelease }) =>
-{
+const MovieDetails = ({informationMovieDetails,genresString,yearRelease }) =>
+{       const  id  = useParams();
         const location = useLocation();
         const go_Back = location?.state?.from ?? '/';
   
         let url;
         (informationMovieDetails.poster_path === null) ?  url= `../images/mi_fotou.jpg` : url = `${BASE_IMG_URL}${MOBILE_SIZES}${informationMovieDetails.poster_path}`
-
+console.log('id-------',id)
     return (
         <main>
            {id?
@@ -57,6 +57,6 @@ export default MovieDetails;
 MovieDetails.propTypes = {
     informationOnFilm: PropTypes.object,
     genresString: PropTypes.string,
-    id: PropTypes.number,
+   // id: PropTypes.number,
     yearRelease:PropTypes.string,
 }

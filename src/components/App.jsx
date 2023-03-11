@@ -87,7 +87,7 @@ export const App = () => {
         <Route path="/">
         <Route index element={<Home> <div><h1>Trending today</h1></div> <ResultSearchFilm onLink={activId} ResultSearchFilm={informationTrendingOnFilm} /></Home>   } />
         <Route path="movies" element={<Movies > <Searchbar onSubmit={updateNameFilm}></Searchbar> {searchWord && < ResultSearchFilm onLink={activId} ResultSearchFilm={informationSearchOnFilm} />}  </Movies>} />
-        <Route path="movies/:movieId" element={<MovieDetails informationMovieDetails={informationMovieDetails} genresString={genresString.current} id={id} yearRelease={yearRelease.current} />} >
+        <Route path="/movies/:movieId" element={<MovieDetails informationMovieDetails={informationMovieDetails} genresString={genresString.current}  yearRelease={yearRelease.current} />} >
             <Route path="cast" element={<Cast id={id } /> } />
             <Route path="reviews" element={<Reviews id={id} />} />
         </Route>

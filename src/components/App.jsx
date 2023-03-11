@@ -10,7 +10,6 @@ import  Searchbar  from "./Searchbar/Searchbar";
 import ResultSearchFilm from "./ResultSearchFilm/ResultSearchFilm";
 import Cast from "../components/Cast/Cast";
 import Reviews from "../components/Rewiews/Reviews"
-
 import NotFound from "./NotFound/NotFound";
 
 import {
@@ -81,21 +80,22 @@ export const App = () => {
 
   }, [searchWord,id])
   return (
-    <div>
-        <Loyout/>
+   
+      <div>
       <Routes>
-        <Route path="/">
-        <Route index element={<Home> <div><h1>Trending today</h1></div> <ResultSearchFilm onLink={activId} ResultSearchFilm={informationTrendingOnFilm} /></Home>   } />
-        <Route path="movies" element={<Movies > <Searchbar onSubmit={updateNameFilm}></Searchbar> {searchWord && < ResultSearchFilm onLink={activId} ResultSearchFilm={informationSearchOnFilm} />}  </Movies>} />
-        <Route path="/movies/:movieId" element={<MovieDetails informationMovieDetails={informationMovieDetails} genresString={genresString.current}  yearRelease={yearRelease.current} />} >
-            <Route path="cast" element={<Cast id={id } /> } />
-            <Route path="reviews" element={<Reviews id={id} />} />
-        </Route>
-        
-        </Route>
+        <Route path="/" element={<Loyout />}>
+          <Route index element={<Home> <div><h1>Trending today</h1></div> <ResultSearchFilm onLink={activId} ResultSearchFilm={informationTrendingOnFilm} /></Home>   } />
+           
+            <Route path="movies" element={<Movies > <Searchbar onSubmit={updateNameFilm}></Searchbar> {searchWord &&< ResultSearchFilm onLink={activId} ResultSearchFilm={informationSearchOnFilm} />}  </Movies>} />     
+            <Route path="movies/:id" element={<MovieDetails informationMovieDetails={informationMovieDetails} genresString={genresString.current} id={id} yearRelease={yearRelease.current} />} >
+                <Route path="cast" element={<Cast id={id } /> } />
+                <Route path="reviews" element={<Reviews id={id} />} />
+            </Route>
+          </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-   </div>
+    </div>
+   
   );
 };
       

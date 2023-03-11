@@ -1,16 +1,18 @@
 import PropTypes from 'prop-types';
 import { NavLink,} from "react-router-dom";
 import { generatePath, useLocation } from 'react-router-dom';
-import { useEffect } from 'react';
+//import { useEffect } from 'react';
 //import { Link } from "react-router-dom";
-let str = 'movies/:movieId';
+let str = '/:movieId';
 const ResultSearchFilm = ({onLink,ResultSearchFilm}) =>
 {
+ 
   const location = useLocation();
 
-  useEffect(()=>{if (location.pathname === '/movies') { location.pathname = '/'; }},[location])
-   
+  console.log('ResultSearchFilm-location', location);
   
+ // if (location.pathname === '/movies') {str = '/:movieId'; };//{ location.pathname = '/'; }
+ // useEffect(()=>{if (location.pathname === '/movies') { location.pathname = '/'; }},[location])
 
    const onClickLink = (event) => {
          onLink(event.target.id);

@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types';
 import { useState,useEffect, useRef } from 'react';
 import { requestGet } from '../requestGet';
 import { CastBox } from './Cast.stiled';
+import { useParams } from "react-router-dom";
+
 import {
     MAIN_PART_URL,
     GET_MOVIE_DETAILS,
@@ -11,19 +12,19 @@ import {
     MOBILE_SIZES,
 } from '../vars';
  
-const Cast = ({ id }) =>
-{
+const Cast = () =>
+{    const {movieId} = useParams();
     const [informationCast, setInformationCast] = useState([]);
     const prevId = useRef(0);
 
     useEffect(() => {
-        if (prevId.current === id) { return; }
-        prevId.current = id;
-        requestGet(MAIN_PART_URL, GET_MOVIE_DETAILS, id, Get_MOVIE_CREDITS, API_KEY)
+        if (prevId.current === Number(movieId)) { return; }
+        prevId.current = Number(movieId);
+        requestGet(MAIN_PART_URL, GET_MOVIE_DETAILS, prevId.current, Get_MOVIE_CREDITS, API_KEY)
             .then(res => {
             setInformationCast(res.data.cast);
             })
-            }, [id]);
+            }, [movieId]);
 
 let url = `${BASE_IMG_URL}${MOBILE_SIZES}`
        
@@ -39,6 +40,3 @@ let url = `${BASE_IMG_URL}${MOBILE_SIZES}`
      )
 }
 export default Cast;
-Cast.propTypes = {
-    id: PropTypes.number,
-}

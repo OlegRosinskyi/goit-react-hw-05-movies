@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 //import {useNavigate} from "react-router-dom"
-import { useLocation } from "react-router-dom";
+//import { useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { SearchbarInput } from "./Searchbar.stiled";
 import { SearchbarBox } from "./Searchbar.stiled";
@@ -13,8 +13,8 @@ export default function Searchbar({ onSubmit }) {
 
     const [filmName, setFilmName] = useState('');
   //  const navigate = useNavigate();
-    const location = useLocation(); 
-    console.log('Searchbar-location', location);
+  //  const location = useLocation(); 
+   
     const hendleSubmit = (event) => {
         event.preventDefault();
         if (filmName.trim() === '') { toast.error('Введите название фильма'); return; }

@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types';
+
 import { useState, useRef, useEffect } from 'react';
 import { requestGet } from '../requestGet';
 import { RewiewsBox } from './Reviews.stiled';
+import { useParams } from "react-router-dom";
 
 import {
     MAIN_PART_URL,
@@ -9,19 +10,20 @@ import {
     API_KEY,
     Get_MOVIE_REWIEWS,
 } from '../vars';
-const Reviews = ({ id }) =>
+const Reviews = () =>
 {
     const [informationReviews, setInformationReviews] = useState([]);
     const prevId = useRef(0);
-  
+    const movieId = useParams();
+ 
     useEffect(() => {
-        if (prevId.current === id) { return; }
-        prevId.current = id;
-        requestGet(MAIN_PART_URL, GET_MOVIE_DETAILS, id, Get_MOVIE_REWIEWS, API_KEY)
+        if (prevId.current === Number(movieId)) { return; }
+        prevId.current = Number(movieId);
+        requestGet(MAIN_PART_URL, GET_MOVIE_DETAILS, movieId, Get_MOVIE_REWIEWS, API_KEY)
             .then(res => {
             setInformationReviews(res.data.results);
             })
-    },[id])
+    },[movieId])
     return (
       <main>
             <RewiewsBox>{
@@ -34,8 +36,6 @@ const Reviews = ({ id }) =>
      )
 }
 export default Reviews;
-Reviews.propTypes = {
-    informationreviews: PropTypes.array,
-}
+
 
  

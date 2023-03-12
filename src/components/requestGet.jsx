@@ -10,7 +10,7 @@ export async function requestGet(base_url, path,id, key, ...parameters) {
       ;}
     
     const response = await axios.get(requestURL) 
-    console.log('response',response);
+   // console.log('response',response);
     return response;
   } catch (err) {
     console.log(err);

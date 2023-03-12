@@ -1,8 +1,5 @@
- 
 const NotFound = () =>
 {
-    
-   
     return (
       <main>
             <div>

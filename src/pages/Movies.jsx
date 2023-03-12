@@ -1,4 +1,3 @@
-
 import Searchbar from 'components/Searchbar/Searchbar';
 import { useSearchParams } from 'react-router-dom';
 import { useEffect, useState, useRef } from 'react';
@@ -9,8 +8,6 @@ import {
   MAIN_PART_URL,
   SEARCH_MOVIE,
 } from '../components/vars';
- 
-
 const Movies = () =>
 {
   const [informationSearchOnFilm, setInformationSearchOnFilm] = useState([]);
@@ -22,9 +19,6 @@ const Movies = () =>
     //Збереження в state пошукового слова запиту на пошук фільму.
     setSearchParams(filmName !== '' ? { searchWord: filmName } : {});
   } 
-
-
-  
    useEffect(() => {
     if (searchWord !== '') {
       if (prevFilmName.current !== searchWord) {
@@ -33,11 +27,10 @@ const Movies = () =>
           .then(res => { setInformationSearchOnFilm(res.data.results); });
       }
      } }, [searchWord])     
-   // console.log('ImageGalleryItem',datas);
-    return (
+       return (
         <main> 
         <Searchbar onSubmit={updateNameFilm}>  </Searchbar>
-        {searchWord && < ResultSearchFilm  ResultSearchFilm={informationSearchOnFilm} />}  
+        {searchWord && < ResultSearchFilm  movies={informationSearchOnFilm} />}  
         </main>
      )
 }

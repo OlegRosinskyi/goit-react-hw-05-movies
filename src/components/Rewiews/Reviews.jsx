@@ -1,4 +1,3 @@
-
 import { useState, useRef, useEffect } from 'react';
 import { requestGet } from '../requestGet';
 import { RewiewsBox } from './Reviews.stiled';

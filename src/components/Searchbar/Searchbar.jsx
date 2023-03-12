@@ -1,7 +1,4 @@
 import { useState } from "react";
-
-//import {useNavigate} from "react-router-dom"
-//import { useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
 import { SearchbarInput } from "./Searchbar.stiled";
 import { SearchbarBox } from "./Searchbar.stiled";
@@ -12,20 +9,15 @@ import { toast } from "react-toastify";
 export default function Searchbar({ onSubmit }) {
 
     const [filmName, setFilmName] = useState('');
-  //  const navigate = useNavigate();
-  //  const location = useLocation(); 
-   
     const hendleSubmit = (event) => {
         event.preventDefault();
+
         if (filmName.trim() === '') { toast.error('Введите название фильма'); return; }
         onSubmit(filmName.trim());
-    //    navigate("movies", );
         resetSearchImage();
     };
     const searchImage = (event) => { event.preventDefault(); setFilmName(event.currentTarget.value); };
     const resetSearchImage = () => { setFilmName(''); };
-
-    //useEffect(() =>{},[filmName])
 return (
             <SearchbarBox>
             <SearchbarForm onSubmit={hendleSubmit}>
@@ -42,7 +34,6 @@ return (
                 </Searchbarbutton>
             </SearchbarForm>
         </SearchbarBox>  
-        
      )
  }
 Searchbar.propTypes = {

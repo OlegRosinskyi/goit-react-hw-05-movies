@@ -25,7 +25,9 @@ const MovieDetails = () =>
     const yearRelease = useRef('');
     const go_Back = location?.state?.from ?? '/';
     let url;
-        (informationMovieDetails.poster_path === null) ?  url= `../images/mi_fotou.jpg` : url = `${BASE_IMG_URL}${MOBILE_SIZES}${informationMovieDetails.poster_path}`
+    (informationMovieDetails.poster_path === null) ?
+        url = `../images/mi_fotou.jpg` :
+        url = `${BASE_IMG_URL}${MOBILE_SIZES}${informationMovieDetails.poster_path}`
     
 useEffect(() => {
 

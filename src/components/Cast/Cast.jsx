@@ -33,7 +33,12 @@ let url = `${BASE_IMG_URL}${MOBILE_SIZES}`
             <CastBox>
                 <ul>
                     
-                {informationCast.map((item, index) => <li key={item.id}> <div><img src={url+item.profile_path} width='46px' alt={item.name} /> <p>{item.name}</p> <p>Character: {item.character}</p></div> </li>)}
+                    {informationCast.map((item, index) =>
+                        <li key={item.id}>
+                            <div><img src={url + item.profile_path} width='46px' alt={item.name} />
+                                <p>{item.name}</p>
+                                <p>Character: {item.character}</p></div>
+                        </li>)}
                 </ul> 
             </CastBox>
       </main>
